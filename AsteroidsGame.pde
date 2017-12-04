@@ -1,6 +1,8 @@
 Spaceship ship=new Spaceship();
-Asteroid[] asteroids=new Asteroid[10];
+//Asteroid[] asteroids=new Asteroid[10];
+ArrayList <Asteroid> asteroids=new ArrayList <Asteroid>();
 Stars[] star=new Stars[1000];
+
 public void setup() 
 {
   size(500,500);
@@ -8,26 +10,37 @@ public void setup()
   {
     star[a]=new Stars();  
   }
-  for(int b=0; b<asteroids.length; b++)
+  for(int b=0; b<=10; b++)
   {
-    asteroids[b]=new Asteroid();  
+    //Asteroid asteroids=new Asteroid();
+    asteroids.add(new Asteroid());
   }
 }
+
 public void draw() 
 {
   background(0);
+  ship.show();
+  ship.move();
   for(int a=0; a<star.length; a++)
   {
     star[a].show();
   }
-  for(int b=0; b<asteroids.length; b++)
+  for(int b=0; b<asteroids.size(); b++)
   {
-    asteroids[b].show();
-    asteroids[b].move();  
+    asteroids.get(b).show();
+    asteroids.get(b).move();
+    //asteroids[b].show();
+    //asteroids[b].move();  
+
+  //if(dist(asteroids.get(b).getX().asteroids.get(b).getY().ship.getX().ship.getY())<30)
+  if(dist((float)asteroids.get(b).getX(), (float)asteroids.get(b).getY(), (float)ship.getX(), (float)ship.getY())<25)
+  {
+    asteroids.remove(b);
   }
-  ship.show();
-  ship.move();
 }
+}
+
 public void keyPressed()
 {
   if(key=='h')
